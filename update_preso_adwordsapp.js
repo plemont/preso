@@ -1,3 +1,8 @@
+/**
+ * Creating dynamic visualisations using the Slides API within Apps Script.
+ *
+ * See: http://plemont.github.io/javascript/slides-api/2016/12/08/dynamic-dashboarding-with-slides-api.html
+ */
 var CLIENT_ID = 'INSERT_CLIENT_ID';
 var CLIENT_SECRET = 'INSERT_CLIENT_SECRET';
 var REFRESH_TOKEN = 'INSERT_REFRESH_TOKEN';
@@ -9,7 +14,8 @@ var SCOPE = 'https://www.googleapis.com/auth/presentations ' +
 
 var oauthUrlFetchApp;
 
-// Example use
+// Example use - consult this function for how to use the updatePresentation
+// function in your own projects.
 function main() {
   if (typeof OAuth2 === 'undefined') {
     var libUrl = 'https://developers.google.com/adwords/scripts/docs/examples/oauth20-library';
@@ -20,6 +26,8 @@ function main() {
     CLIENT_SECRET, REFRESH_TOKEN, SCOPE);
 
   // Text mappings to change in the presentation
+  // For example, a text label created with "${heading1}" when creating the
+  // slide, will have text replaced with "My presentation".
   var mappings = {
     'heading1': 'My presentation ',
     'heading2': 'Last updated: ' +
@@ -28,6 +36,11 @@ function main() {
   };
 
   // Tables in the presentation to update from Sheets data.
+  // For example, if a 3x3 table is created in the document, and "${testtable}"
+  // placed in the top left cell, then with every subsequent execution, 3x3 of
+  // data will be taken from the Sheets document with id as per below, and
+  // Sheetname "TableData". Add further entries to the tables object for each
+  // table in the presentation
   var tables = {
     'testtable': {
       id: '<...Sheets ID...>',

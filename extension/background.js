@@ -4,15 +4,16 @@
  * This script, as part of a Chrome extension, allows the refreshing and looping
  * of Google Slides documents (without having to resort to "Publishing to web").
  *
- * See: https://plemont.github.io for details.
+ * See: http://plemont.github.io/javascript/slides-api/2016/12/08/dynamic-dashboarding-with-slides-api.html
  */
+const REFRESH_MS = 60000;
 const PRESO_REGEX = /^https:\/\/docs\.google\.com\/presentation\/d\/[^/]+\/present(.*)$/;
 
 function fullscreenAndLoop(tab) {
   chrome.windows.getCurrent(win =>
     chrome.windows.update(win.id, {state: 'fullscreen'}));
   let nextUrl = calculateNextSlideUrl(tab.url);
-  setTimeout(createReload(tab.id, nextUrl), 10000);
+  setTimeout(createReload(tab.id, nextUrl), REFRESH_MS);
 }
 
 function calculateNextSlideUrl(url) {

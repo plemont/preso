@@ -2,6 +2,8 @@ var SLIDES_ID = 'INSERT_SLIDES_ID';
 
 function main() {
   // Text mappings to change in the presentation
+  // For example, a text label created with "${heading1}" when creating the
+  // slide, will have text replaced with "My presentation".
   var mappings = {
     'heading1': 'My presentation ',
     'heading2': 'Last updated: ' +
@@ -10,6 +12,11 @@ function main() {
   };
 
   // Tables in the presentation to update from Sheets data.
+  // For example, if a 3x3 table is created in the document, and "${testtable}"
+  // placed in the top left cell, then with every subsequent execution, 3x3 of
+  // data will be taken from the Sheets document with id as per below, and
+  // Sheetname "TableData". Add further entries to the tables object for each
+  // table in the presentation
   var tables = {
     'testtable': {
       id: '<...Sheets ID...>',
